@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% block body %}
+
+<table>
+      <tr>
+            <th>Word</th>
+            <th>Frequency</th>
+            <th>Associations</th>
+      </tr>
+{% for entry in basicData %}
+<tr>
+      <td>{{ entry['word'] }}</td>
+      <td>{{ entry['frequency'] }}</td>
+      <td>{{ entry['associations'] }}</td>
+</tr>
+{% endfor %}
+</table>
+
+<table>
+      <tr>
+            <th>Rank</th>
+            <th>Word</th>
+            <th>Frequency</th>
+            <th>Chosen Associations</th>
+            <th>Associations</th>
+      </tr>
+
+{% for entry in advancedData %}
+<tr>
+      <td>{{ entry['score'] }}</td>
+      <td>{{ entry['word'] }}</td>
+      <td>{{ entry['frequency'] }}</td>
+      {% if entry['associations'][index] is mapping %}
+            <td>{{ entry['associations'][index] }}</td>
+      {% else %}
+            <td></td>
+      {% endif %}
+      <td>{{ entry['associations'] }}</td>
+</tr>
+{% endfor %}
+</table>
+
+{% endblock %}

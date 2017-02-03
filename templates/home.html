@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block body %}
+
+<form action="/checkfile" method="post" enctype = "multipart/form-data">
+      <input type="file" accept=".txt" name="file"><br />
+      <label>Score by first</label>
+      <input type="radio" name="option" value="0" checked="true"><br />
+      <label>Score by second</label>
+      <input type="radio" name="option" value="1"><br />
+      <label>Score by third</label>
+      <input type="radio" name="option" value="2"><br />
+      <label> Upload selected file</label>
+      <input type="submit" value="Submit">
+</form>
+
+{% endblock %}
