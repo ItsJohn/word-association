@@ -2,6 +2,7 @@ from string import punctuation
 from collections import Counter
 from nltk.tokenize import word_tokenize
 from nltk.corpus import stopwords
+from operator import itemgetter
 import json
 
 
@@ -35,6 +36,10 @@ def get_word_associations():
     return norms
 
 
+def sortvalues(data):
+    return int(list(data.values())[0])
+
+
 def generate_structured_data(data, frequency_count):
     words = []
     norms = get_word_associations()
@@ -44,7 +49,11 @@ def generate_structured_data(data, frequency_count):
             associations = {
                 'word': word,
                 'frequency': frequency_count[word],
-                'associations': norms[word][:3]
+                'associations': sorted(
+                    norms[word][:3],
+                    key=sortvalues,
+                    reverse=True
+                )
             }
         else:
             associations = {
