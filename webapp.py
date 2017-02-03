@@ -17,21 +17,25 @@ def homepage():
 
 @app.route('/checkfile', methods=['POST'])
 def checkfile():
+    stopWords = False
     if not request.files['file']:
         return redirect(url_for("homepage"))
     choice = int(request.form['option'])
+    if 'stopWords' in request.form:
+        stopWords = True
     f = request.files['file']
     f.save('uploadedFiles/' + secure_filename(f.filename))
+    data = openFile('uploadedFiles/' + f.filename, choice, stopWords)
     return render_template(
         'results.html',
         index=choice,
         basicData=sorted(
-            openFile('uploadedFiles/' + f.filename, choice),
+            data,
             key=itemgetter('frequency'),
             reverse=True
         ),
         advancedData=sorted(
-            openFile('uploadedFiles/' + f.filename, choice),
+            data,
             key=itemgetter('score'),
             reverse=True
         )

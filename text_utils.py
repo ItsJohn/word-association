@@ -1,5 +1,7 @@
 from string import punctuation
 from collections import Counter
+from nltk.tokenize import word_tokenize
+from nltk.corpus import stopwords
 import json
 
 
@@ -14,12 +16,12 @@ def remove_punctuation(words):
             while ((front is False) or (back is False)) and word is not "":
                 if front is False:
                     if word[:1] in punctuation:
-                        word = word.replace(word[:1], "")
+                        word = word[1:]
                     else:
                         front = True
                 if back is False:
                     if word[-1:] in punctuation:
-                        word = word.replace(word[-1:], "")
+                        word = word[:-1]
                     else:
                         back = True
         if word is not "":
@@ -55,12 +57,11 @@ def generate_structured_data(data, frequency_count):
 
 
 def manipulate_data(data):
-    data = data.split(' ')
+    data = word_tokenize(data)
     data = remove_punctuation(data)
     frequency_count = Counter(data)
 
-    data = set(data)
-    return generate_structured_data(data, frequency_count)
+    return generate_structured_data(set(data), frequency_count)
 
 
 def read_file(filename):
@@ -69,3 +70,11 @@ def read_file(filename):
         for line in fh:
             doc += line[:-1].lower() + ' '
     return doc
+
+
+def removeStopWords(data):
+    new_words = []
+    for word in data:
+        if word['word'] not in stopwords.words('english'):
+            new_words.append(word)
+    return new_words

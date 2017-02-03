@@ -1,14 +1,14 @@
 import pymongo
 import hashlib
 from os import stat
-from text_utils import read_file, manipulate_data
+from text_utils import read_file, manipulate_data, removeStopWords
 
 
 client = pymongo.MongoClient()
 db = client['wordAssociationDB']
 
 
-def find_this_file(filename):
+def find_this_file(filename, stopWords):
     data = read_file(filename)
     hash_details = hashlib.sha256(bytes(data, encoding='utf-8')).hexdigest()
     collections = db[hash_details]
@@ -18,4 +18,6 @@ def find_this_file(filename):
         data = manipulate_data(data)
         for value in data:
             collections.insert(value, check_keys=False)
+    if stopWords:
+        return removeStopWords(data)
     return data

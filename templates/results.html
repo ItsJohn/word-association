@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 {% block body %}
-
+<h1 id="basic">Basic Version</h1>
+<a href="#advanced">Click to go to the advanced version</a>
 <table>
       <tr>
             <th>Word</th>
@@ -25,6 +26,8 @@
             <th>Associations</th>
       </tr>
 
+<h1 id="advanced">Advanced Version</h1>
+<a href="#basic">Click to go to the basic version</a>
 {% for entry in advancedData %}
 <tr>
       <td>{{ entry['score'] }}</td>

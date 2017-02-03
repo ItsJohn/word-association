@@ -1,8 +1,8 @@
 from db import find_this_file
 
 
-def openFile(filename, index):
-    data = find_this_file(filename)
+def openFile(filename, index, stopWords):
+    data = find_this_file(filename, stopWords)
     return getScore(index, data)
 
 
