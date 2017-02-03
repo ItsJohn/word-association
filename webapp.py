@@ -1,7 +1,7 @@
 from flask import Flask, render_template, request, redirect, url_for
 from werkzeug import secure_filename
 from operator import itemgetter
-from something import openFile
+from analyse_file import openFile
 
 app = Flask(__name__)
 
