@@ -28,6 +28,7 @@ def checkfile():
     data = openFile('uploadedFiles/' + f.filename, choice, stopWords)
     return render_template(
         'results.html',
+        title="Results",
         index=choice,
         basicData=sorted(
             data,

@@ -6,7 +6,7 @@ from operator import itemgetter
 import json
 
 
-def remove_punctuation(words):
+def remove_punctuation(words: list):
     new_words = []
     for word in words:
         front = False
@@ -36,11 +36,11 @@ def get_word_associations():
     return norms
 
 
-def sortvalues(data):
+def sortvalues(data: dict):
     return int(list(data.values())[0])
 
 
-def generate_structured_data(data, frequency_count):
+def generate_structured_data(data: set, frequency_count: set):
     words = []
     norms = get_word_associations()
     for word in data:
@@ -65,15 +65,14 @@ def generate_structured_data(data, frequency_count):
     return words
 
 
-def manipulate_data(data):
+def manipulate_data(data: str):
     data = word_tokenize(data)
     data = remove_punctuation(data)
     frequency_count = Counter(data)
-
     return generate_structured_data(set(data), frequency_count)
 
 
-def read_file(filename):
+def read_file(filename: str):
     doc = ''
     with open(filename, encoding="latin-1") as fh:
         for line in fh:
@@ -81,7 +80,7 @@ def read_file(filename):
     return doc
 
 
-def removeStopWords(data):
+def removeStopWords(data: list):
     new_words = []
     for word in data:
         if word['word'] not in stopwords.words('english'):
